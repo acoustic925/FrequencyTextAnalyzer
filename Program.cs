@@ -132,7 +132,7 @@ namespace FrequencyTextAnalyzer
             return tripletsInLine;
         }
 
-        static List<string> FindTripletsInWord(string word) // осуществляет поиск триплетов в слове
+        static List<string> FindTripletsInWord(string word) // Осуществляет поиск триплетов в слове
         {
             List<string> tripletsInWord = new List<string>();
 
@@ -142,9 +142,9 @@ namespace FrequencyTextAnalyzer
             {
                 if (IsEqual(letterInWord[i], letterInWord[i + 1], letterInWord[i + 2]) && IsLetter(letterInWord[i], letterInWord[i + 1], letterInWord[i + 2])) // Проверка на эквивалентность знаков и на соответствие символов категории букв
                 {
-                    if (i + 3 < letterInWord.Length)
+                    if (i + 3 < letterInWord.Length) // Проверка на конец слова
                     {
-                        if (!IsQuarterlet(letterInWord[i], letterInWord[i + 1], letterInWord[i + 2], letterInWord[i + 3]))
+                        if (!IsQuarterlet(letterInWord[i], letterInWord[i + 1], letterInWord[i + 2], letterInWord[i + 3])) // Проверка не является-ли триплет четырьмя идущими подряд символами
                         {
                             tripletsInWord.Add($"{letterInWord[i]}{letterInWord[i + 1]}{letterInWord[i + 2]}");
                         }
@@ -189,6 +189,6 @@ namespace FrequencyTextAnalyzer
 
         static bool IsLetter(char letter1, char letter2, char letter3) => (letter1 == letter2 && letter1 == letter3); // Проверка на эквивалентность символов
         static bool IsEqual(char letter1, char letter2, char letter3) => (Char.IsLetter(letter1) && Char.IsLetter(letter2) && Char.IsLetter(letter3)); // Проверка на принадлежность символов к буквенному типу
-        static bool IsQuarterlet(char letter1, char letter2, char letter3, char letter4) => (letter1 == letter2 && letter1 == letter3 && letter1 == letter4);
+        static bool IsQuarterlet(char letter1, char letter2, char letter3, char letter4) => (letter1 == letter2 && letter1 == letter3 && letter1 == letter4); // Проверка на четыре идущих подряд символа
     }
 }

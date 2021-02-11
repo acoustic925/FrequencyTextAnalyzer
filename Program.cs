@@ -142,7 +142,17 @@ namespace FrequencyTextAnalyzer
             {
                 if (IsEqual(letterInWord[i], letterInWord[i + 1], letterInWord[i + 2]) && IsLetter(letterInWord[i], letterInWord[i + 1], letterInWord[i + 2])) // Проверка на эквивалентность знаков и на соответствие символов категории букв
                 {
-                    tripletsInWord.Add($"{letterInWord[i]}{letterInWord[i + 1]}{letterInWord[i + 2]}");                
+                    if (i + 3 < letterInWord.Length)
+                    {
+                        if (!IsQuarterlet(letterInWord[i], letterInWord[i + 1], letterInWord[i + 2], letterInWord[i + 3]))
+                        {
+                            tripletsInWord.Add($"{letterInWord[i]}{letterInWord[i + 1]}{letterInWord[i + 2]}");
+                        }
+                    }
+                    else
+                    {
+                        tripletsInWord.Add($"{letterInWord[i]}{letterInWord[i + 1]}{letterInWord[i + 2]}");
+                    }
                 }
             }           
             return tripletsInWord;           
@@ -169,7 +179,7 @@ namespace FrequencyTextAnalyzer
 
             for (int i = 0; i < sortedTripletInTextFile.Count - 1; i++)
             {
-                lineOut += sortedTripletInTextFile.ElementAt(i).Key + ", ";
+                lineOut += sortedTripletInTextFile.ElementAt(i).Key + sortedTripletInTextFile.ElementAt(i).Value.ToString() +  ", ";
             }
 
             lineOut += sortedTripletInTextFile.ElementAt(sortedTripletInTextFile.Count - 1).Key;
@@ -179,5 +189,6 @@ namespace FrequencyTextAnalyzer
 
         static bool IsLetter(char letter1, char letter2, char letter3) => (letter1 == letter2 && letter1 == letter3); // Проверка на эквивалентность символов
         static bool IsEqual(char letter1, char letter2, char letter3) => (Char.IsLetter(letter1) && Char.IsLetter(letter2) && Char.IsLetter(letter3)); // Проверка на принадлежность символов к буквенному типу
+        static bool IsQuarterlet(char letter1, char letter2, char letter3, char letter4) => (letter1 == letter2 && letter1 == letter3 && letter1 == letter4);
     }
 }
